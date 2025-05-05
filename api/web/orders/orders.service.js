@@ -15,16 +15,12 @@ async function create(userId, orderData) {
 
 async function list (userId) {
     try {
-
-        // const page = 3
-        // const limit = 10
-
-        // return Order.find({})
-        //     .sort({createdAt: 1})
-        //     .skip((page-1)*limit) //20
-        //     .limit(limit) //10
-
-
+        const query = {}
+        if (userId) {
+            query.user_id = new ObjectId(userId)
+        }
+        return Order.find(query)
+            .sort({createdAt: 1})
     } catch (err) {
         throw new Error(err)
     }
