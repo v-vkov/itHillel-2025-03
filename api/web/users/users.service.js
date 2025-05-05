@@ -1,6 +1,7 @@
 const User = require('../../../models/users')
 
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const registerUser = async (data) => {
     try {
@@ -20,12 +21,40 @@ const registerUser = async (data) => {
     
         return user.save()
     } catch (err) {
-        console.log()
         throw new Error(`Error register user: ${err && err.message}`)
+    }   
+}
+
+const login = async (data) => {
+    try {
+        const user = await User.findOne({email: data.email})
+        if (!user) throw new Error('Invalid credentials')
+
+        const isMatch = await bcrypt.compare(data.password, user.password)
+        if (!isMatch) throw new Error('Invalid credentials')
+
+        const token = jwt.sign(
+            {
+                email: user.email, role: 'user'
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: '30d',
+                issuer: 'api:web'
+            }
+        )
+
+        return {
+            email: user.email,
+            name: user.name,
+            token
+        }
+    } catch (err) {
+        throw new Error(`Error login user: ${err && err.message}`)
     }
-    
 }
 
 module.exports = {
-    registerUser
+    registerUser,
+    login
 }

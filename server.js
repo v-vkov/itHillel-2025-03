@@ -7,6 +7,8 @@ const swaggerUI = require('swagger-ui-express')
 const YAML = require('yamljs')
 const cookieParser = require('cookie-parser')
 
+const { connectDb } = require('./utils/connection.util')
+
 const indexRouter = require('./api/index.router')
 const swaggerApiDoc = YAML.load('./api-docs/base.yaml')
 const errorHandler = require('./api/common/middleware/error.middleware')
@@ -14,11 +16,8 @@ const errorHandler = require('./api/common/middleware/error.middleware')
 const app = express()
 const server = http.createServer(app)
 
-const mongoose = require('mongoose')
-
-mongoose.connect(process.env.MONGO_DB_URI)
-    .then(() => console.log('Database connected'))
-    .catch((err) => console.error('Database error', err))
+// db connection 
+connectDb()
 
 app.set('view engine', 'ejs')
 app.set('views', './views')
