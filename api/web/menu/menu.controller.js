@@ -7,8 +7,18 @@ async function listMenu(req, res) {
     return res.status(200).json(menu)
 }
 
+async function renderMenu (req, res) {
+    try {
+        const menu = await menuService.list()
+        return res.render('pizzas', {pizzas: menu})
+    } catch (err) {
+        return res.status(500).json({error: err && err.message})
+    }  
+}
+
 module.exports = {
-    listMenu
+    listMenu,
+    renderMenu
 }
 
 

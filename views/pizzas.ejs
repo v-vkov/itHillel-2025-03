@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pizza Menu</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Pizza Menu</h1>
+  <ul class="menu">
+    <% pizzas.forEach(pizza => { %>
+      <li class="pizza <%= pizza.soldOut ? 'sold-out' : '' %>">
+        <h3><%= pizza.name %> — $<%= pizza.unitPrice %></h3>
+        <p>Ingredients: <%= pizza.ingredients.join(', ') %></p>
+        <img src="<%= pizza.imageUrl %>" alt="<%= pizza.name %>">
+        <% if (pizza.soldOut) { %>
+          <strong class="notice">Sold Out</strong>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

@@ -2,7 +2,7 @@
 const Products = require('../../../models/products')
 
 async function list() {
-    return menuItems
+    return Products.find({})
 }
 
 module.exports = {
