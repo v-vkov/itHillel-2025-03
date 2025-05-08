@@ -12,7 +12,14 @@ async function listOrders(req, res) {
     return res.status(200).json(orders)
 }
 
+async function updateOrder(req, res) {
+    const order = await ordersService.updateOrder(req.params.id, req.body)
+
+    return res.status(200).json(order)
+}
+
 module.exports = {
     createOrder,
-    listOrders
+    listOrders,
+    updateOrder
 }

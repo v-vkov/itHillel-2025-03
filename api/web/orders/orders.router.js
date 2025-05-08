@@ -6,5 +6,6 @@ const router = express.Router()
 
 router.get('/', ordersController.listOrders)
 router.post('/:user_id', ordersMiddleware.validateOrder, ordersController.createOrder)
+router.put('/:id', ordersController.updateOrder)
 
 module.exports = router

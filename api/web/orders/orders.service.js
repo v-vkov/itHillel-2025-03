@@ -26,7 +26,21 @@ async function list (userId) {
     }
 }
 
+async function updateOrder(orderId, data = {}) {
+    try {
+        const updated = await Order.findByIdAndUpdate(orderId, {
+            $push: {
+                items: data.new_pizza
+        }}, {new: true})
+
+        return updated
+    } catch (err) {
+        throw new Error(err)
+    }
+}
+
 module.exports = {
     create,
-    list
+    list,
+    updateOrder
 }

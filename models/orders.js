@@ -15,7 +15,8 @@ const ordersSchema = new mongoose.Schema({
        required: true
     },
     delivery_address: {
-        type: String
+        city: {type: String},
+        country: {type: String}
     }
 }, {
     timestamps: true
@@ -25,8 +26,6 @@ const ordersSchema = new mongoose.Schema({
 ordersSchema.index({user_id: 1}) 
 
 ordersSchema.index({createdAt: 1}, { expireAfterSeconds: 15552000 }) // 180 days
-
-
 
 
 module.exports = mongoose.model('Order', ordersSchema, 'orders')
