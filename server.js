@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000 // 5000 8080 3001
 const swaggerUI = require('swagger-ui-express')
 const YAML = require('yamljs')
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 
 const { connectDb } = require('./utils/connection.util')
 
@@ -26,6 +27,9 @@ app.use(express.static('public'))
 const morgan = require('morgan')
 app.use(morgan('dev'))
 app.use(cookieParser())
+app.use(cors({
+    origin: ['http://localhost:5173']
+}))
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerApiDoc))
 app.use('/', express.json(), indexRouter)
