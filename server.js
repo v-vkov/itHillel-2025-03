@@ -32,7 +32,7 @@ app.use(cors({
 }))
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerApiDoc))
-app.use('/', express.json(), indexRouter)
+app.use('/', indexRouter)
 
 app.use(errorHandler)
 

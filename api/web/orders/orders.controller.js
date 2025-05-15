@@ -18,8 +18,17 @@ async function updateOrder(req, res) {
     return res.status(200).json(order)
 }
 
+async function getPaymentLink(req, res) {
+    const url = await ordersService.getPaymentLink(req.params.id)
+
+    return res.status(200).json({
+        payment_link: url
+    })
+}
+
 module.exports = {
     createOrder,
     listOrders,
-    updateOrder
+    updateOrder,
+    getPaymentLink
 }
