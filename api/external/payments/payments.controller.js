@@ -2,6 +2,9 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET
 
+const emailSender = require('../../../utils/email-sender.util')
+const pdfGenerator = require('../../../utils/pdf-generator.util')
+
 async function handleWebhook(req, res) {
     let event = req.body
 
@@ -35,6 +38,21 @@ async function handleWebhook(req, res) {
              // just to test
             const charge = event.data.object
             console.log(`charge`, charge)
+
+            const pdf = await pdfGenerator.generatePdf(charge.receipt_url)
+
+            await emailSender.sendEmail({
+              from: 'Acme <onboarding@resend.dev>',
+              to: ['rambambam72@gmail.com'],
+              subject: 'Order Paid',
+              html: '<strong>We recieved your order.</strong>',
+              attachments: [{
+                content: Buffer.from(pdf),
+                filename: 'order_reciept.pdf'
+              }]
+            })
+
+
             break
         default:
           // Unexpected event type

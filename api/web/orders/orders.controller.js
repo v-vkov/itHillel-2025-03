@@ -26,9 +26,18 @@ async function getPaymentLink(req, res) {
     })
 }
 
+async function getOrdersReport(req, res) {
+    const url = await ordersService.getOrdersReport()
+
+    return res.status(200).json({
+        sent: true
+    })
+}
+
 module.exports = {
     createOrder,
     listOrders,
     updateOrder,
-    getPaymentLink
+    getPaymentLink,
+    getOrdersReport
 }
