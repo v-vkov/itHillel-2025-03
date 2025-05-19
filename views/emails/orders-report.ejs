@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Order Report</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; background-color: #fffaf4; margin: 0; padding: 20px;">
+    <h1 style="color: #ff6a00;">Звіт про замовлення 🍕</h1>
+
+    <h2>📊 Загальні метрики</h2>
+    <ul>
+      <li><strong>Унікальних користувачів:</strong> <%= uniqueUsers %></li>
+      <li><strong>Кількість замовлень:</strong> <%= totalOrders %></li>
+      <li><strong>Середній чек:</strong> <%= averageCheck %> грн</li>
+      <li><strong>Максимальний чек:</strong> <%= maxCheck %> грн</li>
+      <li><strong>Мінімальний чек:</strong> <%= minCheck %> грн</li>
+    </ul>
+
+    <h2>🍕 Топ-5 піц</h2>
+    <table width="100%" border="1" cellspacing="0" cellpadding="5" style="border-collapse: collapse;">
+      <thead style="background-color: #ffe5cc;">
+        <tr>
+          <th>ID піци</th>
+          <th>Кількість замовлень</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% topPizzas.forEach(pizza => { %>
+          <tr>
+            <td><%= pizza.name %></td>
+            <td><%= pizza.count %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 30px;">Згенеровано: <%= new Date().toLocaleDateString('uk-UA') %></p>
+  </body>
+</html>
