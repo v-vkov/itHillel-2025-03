@@ -7,6 +7,10 @@ function validateOrder(req, res, next) {
 
     console.log('here new log')
 
+    if (req.user.permissions) {
+        console.log('here is user permissions')
+    }
+
     next()
 }
 
