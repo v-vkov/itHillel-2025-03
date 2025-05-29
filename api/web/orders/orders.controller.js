@@ -34,6 +34,12 @@ async function getOrdersReport(req, res) {
     })
 }
 
+async function deleteOrder(req, res) {
+    return res.status(200).json({
+        deleted: true
+    })
+}
+
 async function sendNotification(req, res) {
     return res.status(200).json({
         sent: true
@@ -46,5 +52,6 @@ module.exports = {
     updateOrder,
     getPaymentLink,
     getOrdersReport,
+    deleteOrder,
     sendNotification
 }
