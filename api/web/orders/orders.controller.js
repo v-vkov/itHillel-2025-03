@@ -34,10 +34,17 @@ async function getOrdersReport(req, res) {
     })
 }
 
+async function deleteOrder(req, res) {
+    return res.status(200).json({
+        deleted: true
+    })
+}
+
 module.exports = {
     createOrder,
     listOrders,
     updateOrder,
     getPaymentLink,
-    getOrdersReport
+    getOrdersReport,
+    deleteOrder
 }
