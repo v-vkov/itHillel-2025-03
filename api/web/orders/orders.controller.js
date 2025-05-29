@@ -34,10 +34,17 @@ async function getOrdersReport(req, res) {
     })
 }
 
+async function sendNotification(req, res) {
+    return res.status(200).json({
+        sent: true
+    })
+}
+
 module.exports = {
     createOrder,
     listOrders,
     updateOrder,
     getPaymentLink,
-    getOrdersReport
+    getOrdersReport,
+    sendNotification
 }
