@@ -5,6 +5,13 @@ const userService = require('./users.service')
 
 const users = require('./mock/users')
 
+const User = require('../../../models/users')
+
+const csv = require('csv-parser')
+const fs = require('fs')
+const path = require('path')
+const { Readable } = require('stream')
+
 async function register (req, res) {
     const {email, password, name} = req.body
 
@@ -85,6 +92,40 @@ function deleteUserById (req, res)  {
     res.json({users: 'User with id deleted'})
 }
 
+async function uploadUsers (req, res)  {
+    console.log('req.file', req.file)
+
+    const stream = Readable.from(req.file.buffer)
+    const usersCreated = []
+
+    stream
+        .pipe(csv())
+        .on('data', async (data) => {
+            
+            if (!data.email) {
+                return res.sendStatus(400)
+            }
+
+            console.log('raw data:', data)
+            usersCreated.push(data.email)
+            // const hash = await bcrypt.hash(data.password, 10)
+
+            // const user = new User({
+            //     email: data.email,
+            //     name: data.name,
+            //     address: data.address,
+            //     phone: data.phone,
+            //     password: hash
+            // })
+
+            // await user.save()
+        })
+        .on('end', () => {   
+            console.log('Finished.')
+            return res.status(201).json({created: usersCreated})
+        }) 
+}
+
 module.exports = {
     register,
     login,
@@ -92,6 +133,7 @@ module.exports = {
     getUsers,
     getUserById,
     createUsers,
-    deleteUserById
+    deleteUserById,
+    uploadUsers
 }
 

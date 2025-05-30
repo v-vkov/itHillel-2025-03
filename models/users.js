@@ -19,6 +19,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['admin', 'user'],
         default: 'user'
+    },
+    address: {
+        type: String
+    }, 
+    phone: {
+        type: String
     }
 }, {
     timestamps: true // createdAt , updatedAt
