@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-local": "nodemon -r dotenv/config server.js",
-    "swagger:build": "swagger-cli bundle ./docs/base.yaml -o ./docs/swagger.json -t json",
-    "start": "node -r dotenv/config server.js"
+    "swagger:build": "swagger-cli bundle ./docs/base.yaml -o ./docs/swagger.json -t json"
   },
   "author": "",
   "license": "ISC",
