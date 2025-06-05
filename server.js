@@ -28,7 +28,7 @@ const morgan = require('morgan')
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(cors({
-    origin: ['http://localhost:5173']
+    origin: ['http://localhost:5173', 'https://pizza-store']
 }))
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerApiDoc))
