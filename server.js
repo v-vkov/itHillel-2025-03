@@ -35,7 +35,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerApiDoc))
 app.use('/', indexRouter)
 
 app.get('/', (req, res) => {
-    res.send('Hello from Pizza Store on Render!')
+    res.send('Hello from Pizza Store on Render! Try via Postman.')
 })
 
 app.use(errorHandler)
