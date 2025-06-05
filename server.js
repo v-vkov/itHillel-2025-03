@@ -34,6 +34,10 @@ app.use(cors({
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerApiDoc))
 app.use('/', indexRouter)
 
+app.get('/', (req, res) => {
+    res.send('Hello from pizza store usinf Render!')
+})
+
 app.use(errorHandler)
 
 server.listen(port, () => {
