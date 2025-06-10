@@ -19,7 +19,7 @@ async function create(userId, orderData) {
     }
 }
 
-async function list (userId) {
+async function list (userId, skip = null, take = null) {
     try {
         const query = {}
         if (userId) {
@@ -27,6 +27,8 @@ async function list (userId) {
         }
         return Order.find(query)
             .sort({createdAt: 1})
+            .skip(skip || 0)
+            .limit(take || 20)
     } catch (err) {
         throw new Error(err)
     }
